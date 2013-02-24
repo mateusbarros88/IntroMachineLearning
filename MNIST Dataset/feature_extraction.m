@@ -47,7 +47,7 @@ rprofile = sum(im(idx));
 %[dist sidx] = sort(sqrt(px.^2+py.^2));
 pradial = zeros(2,length(k));
 
-save('test.mat','im','idx','rr','cc');
+%save('test.mat','im','idx','rr','cc');
 %pause
 for n = k+1
    % sidx(:,n)
