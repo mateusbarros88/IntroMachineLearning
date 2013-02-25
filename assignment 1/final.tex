@@ -38,6 +38,9 @@
 \renewcommand{\floatpagefraction}{0.75}
 \usepackage[draft,english,margin]{fixme}
 
+
+
+
 \begin{document}
 
 %% Insert titlepage
@@ -48,7 +51,44 @@
 
 %% Input files for the report
 \input{\texdir introduction}
+\chapter{Data and Feature Extraction}
+\section{Introduction}
+\fixme{Write about where the data are from and the feature extraction method.}
+
+\chapter{Data Analysis}
+\section{Introduction}
+Introduce what this chapter is about.
+\section{Basic Statistic Properties}
+Show the basic statistics properties of the dataset.
+\begin{figure}[hbtp]
+\begin{minipage}[b]{.45\linewidth}
+\centering\large A
+\subcaption{\includegraphics[width=\linewidth]{corr_explained}}\label{fig:1a}
+\end{minipage}%
+\hfill
+\begin{minipage}[b]{.45\linewidth}
+\centering\large B
+
+\subcaption{\includegraphics[width=\linewidth]{std_explained}}\label{fig:1b}
+\end{minipage}
+\caption{A figure}\label{fig:1}
+\end{figure}
+
+\subsection{Correlation}
+Talk about correlation and explain Figure~\ref{fig:1a}.
+
+
+
+\section{Principal Component Analysis}
+\fixme{The amount of variation explained as a function of the number of PCA com- ponents included}
+\fixme{the principal directions of the considered PCA components}
+\fixme{the data projected onto the considered principal components}
 \input{\texdir pca}
+
+\chapter{Discussion}
+
+\section{Conclusion}
+
 
 
 \end{document}

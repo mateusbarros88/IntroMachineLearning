@@ -146,8 +146,8 @@ colormap(hot);
 set(gca,'XTick', [28/2 28/2+28 28*2+72/2 28*2+72+72]);
 
 set(gca,'XTickLabel',{'H-Hist','V-Hist','Radial Profile','In-Out / Out-in'}); 
-%set(gca,'YTick', nn-n/2);
-%set(gca,'YTickLabel',classNames);
+set(gca,'YTick', nn-n/2);
+set(gca,'YTickLabel',classNames);
 %set(gca,'DataAspectRatio',[1 1 1 ]);
 axis equal square
 xlim([0 size(Data,2)])
@@ -155,7 +155,7 @@ cb = colorbar('peer',gca);
 ylabel(cb, 'Std')
 title('The std map of 2000 samples column standalized to zero mean and unit std.');
 xlabel('Attributes');
-ylabel('Samples');
+ylabel('2000 Samples');
 if saveimgs
     print -depsc std_explained
     copyfile('std_explained.eps','../../conf/img/std_explained.eps');
