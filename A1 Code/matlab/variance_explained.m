@@ -14,9 +14,9 @@ conf_val = [1 0.975 0.95 0.90 0.80 0.60];
 % radials in-out out-in profiles)].
 mode = 2;
 % cache feature data;
-cache = 1; reset = 0; saveimgs = 0;
-% rng(sum('Report')) for report images.
-rng(sum('Report Generation'));
+cache = 1; reset = 0; saveimgs = 1;
+% rng(202322)) for report images.
+rng(202322);
 %% Load Data
 addpath(datapath);
 
@@ -73,7 +73,6 @@ axes1 = axes( 'Parent',figure1, ...
     'XTick',[pcs(end:-1:1)], ...
     'YTick',[rhosum(1) rhosum(pcs(end:-1:1))'], ...
     'DataAspectRatio',[140 1 1]);
-set(figure1,'DefaultTextInterpreter', 'latex')
 box(axes1,'on');
 hold(axes1,'all');
 plot(rhosum, 'Marker','.','Color',[0 0 1]);hold on
@@ -101,20 +100,68 @@ end
 figure1 =  mfig('Digits: Corralation');  clf;
 set(figure1,'DefaultTextInterpreter', 'latex')
 
-N = 1000;
-ridx = randi([1,length(Data)],N,1);
 
-hist(Labels(ridx),0:9);
+
+N = 2000;
+ridx = randi([1,length(Data)],N,1);  
+
+
 [sortLabels sortIdx] = sort(Labels(ridx));
 corrm = corr(Data(ridx,:)');
 imagesc(corrm(sortIdx,sortIdx))%dont translate to get attribute corralation
 
+
+n = hist(sortLabels);
+nn = cumsum(n);
+
+set(gca,'XTick', nn-n/2);
+set(gca,'XTickLabel',classNames); 
+set(gca,'YTick', nn-n/2);
+set(gca,'YTickLabel',classNames);
+%set(gca,'DataAspectRatio',[1 1 1 ]);
+axis equal square
+xlim([0 N])
+cb = colorbar('peer',gca);
+ylabel(cb, 'Corralation Cooficient')
+title('The corralation of 2000 samples sorted by class');
+xlabel('2000 Samples over 10 classes');
+ylabel('2000 Samples over 10 classes');
+if saveimgs
+    print -depsc corr_explained
+    copyfile('corr_explained.eps','../../conf/img/corr_explained.eps');
+    print -djpeg corr_explained
+    copyfile('corr_explained.jpg','../../conf/img/corr_explained.jpg');
+end
+
+
 figure1 =  mfig('Digits: Std');  clf;
 set(figure1,'DefaultTextInterpreter', 'latex')
+
+
 standalizedData = bsxfun(@minus, Data(ridx,:), mean(Data(ridx,:)));
 standalizedData = bsxfun(@rdivide, standalizedData, std(Data(ridx,:)));
 imagesc(max(min(standalizedData(sortIdx,:),3),-3));
 colormap(hot);
+
+set(gca,'XTick', [28/2 28/2+28 28*2+72/2 28*2+72+72]);
+
+set(gca,'XTickLabel',{'H-Hist','V-Hist','Radial Profile','In-Out / Out-in'}); 
+%set(gca,'YTick', nn-n/2);
+%set(gca,'YTickLabel',classNames);
+%set(gca,'DataAspectRatio',[1 1 1 ]);
+axis equal square
+xlim([0 size(Data,2)])
+cb = colorbar('peer',gca);
+ylabel(cb, 'Std')
+title('The std map of 2000 samples column standalized to zero mean and unit std.');
+xlabel('Attributes');
+ylabel('Samples');
+if saveimgs
+    print -depsc std_explained
+    copyfile('std_explained.eps','../../conf/img/std_explained.eps');
+    print -djpeg std_explained
+    copyfile('std_explained.jpg','../../conf/img/std_explained.jpg');
+end
 %%
 
 % Compute the projection onto the principal components
