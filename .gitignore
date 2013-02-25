@@ -27,6 +27,8 @@
 *.toc
 *.synctex.gz
 final.pdf
+final.ps
+final.dvi
 
 #################
 ## Eclipse
