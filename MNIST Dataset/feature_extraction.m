@@ -1,4 +1,4 @@
-function [Data] = feature_extraction(D, nrows, ncols, mode)
+function [Data] = feature_extraction(D, nrows, ncols, mode, debug)
 % Feature Extration
 
 % Read the contents back into an array
@@ -6,6 +6,10 @@ function [Data] = feature_extraction(D, nrows, ncols, mode)
 if nargin <4
     mode = 0;
 end
+if nargin <5
+    debug = 0;
+end
+
 attributes = [16 28*2+72*3];
 Data = zeros(attributes(mode),size(D,2));
 
@@ -45,7 +49,7 @@ idx = (cc-1)*28+rr;
 rprofile = sum(im(idx));
 
 %[dist sidx] = sort(sqrt(px.^2+py.^2));
-pradial = zeros(2,length(k));
+pradial = zeros(length(k),2);
 
 %save('test.mat','im','idx','rr','cc');
 %pause
@@ -63,8 +67,8 @@ for n = k+1
         b = 0;
     end
 
-    pradial(1,n) =a;
-    pradial(2,n) =b;
+    pradial(n,1) =a;
+    pradial(n,2) =b;
 end
 %pradial
 %subplot(2,2,1)
@@ -86,7 +90,7 @@ end
 
 
 %pause
-feat = [hprofile vprofile rprofile pradial(:)'];
+feat = [hprofile vprofile rprofile pradial(:)']; %vertical hist, h hist, r-hist in-out out-in profile
 
 end
 function feat = extract1(column_vec,rows,cols)

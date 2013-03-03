@@ -14,7 +14,7 @@ conf_val = [1 0.975 0.95 0.90 0.80 0.60];
 % radials in-out out-in profiles)].
 mode = 2;
 % cache feature data;
-cache = 1; reset = 0; saveimgs = 1;
+cache = 1; reset = 0; saveimgs = 0;
 % rng(202322)) for report images.
 rng(202322);
 %% Load Data
@@ -53,6 +53,7 @@ clear 'j'
 idx = 1:length(Labels);%find(Labels==1);
 % Subtract the mean from the data
 Y = bsxfun(@minus, Data, mean(Data));
+Y = bsxfun(@rdivide, Y, std(Data));
 
 % Obtain the PCA solution by calculate the SVD of Y
 [U, S, V] = svd(Y,'econ');
@@ -93,9 +94,11 @@ if saveimgs
     copyfile('epsFig.eps','../../conf/img/var_explained.eps');
     print -djpeg epsFig
     copyfile('epsFig.jpg','../../conf/img/var_explained.jpg');
+        delete('epsFig.eps');
+    delete('epsFig.jpg');
 end
 
-%% Corralation
+%% Correlation
 
 figure1 =  mfig('Digits: Corralation');  clf;
 set(figure1,'DefaultTextInterpreter', 'latex')
@@ -131,6 +134,8 @@ if saveimgs
     copyfile('corr_explained.eps','../../conf/img/corr_explained.eps');
     print -djpeg corr_explained
     copyfile('corr_explained.jpg','../../conf/img/corr_explained.jpg');
+    delete('corr_explained.eps');
+    delete('corr_explained.jpg');
 end
 
 
@@ -161,9 +166,18 @@ if saveimgs
     copyfile('std_explained.eps','../../conf/img/std_explained.eps');
     print -djpeg std_explained
     copyfile('std_explained.jpg','../../conf/img/std_explained.jpg');
+    delete('std_explained.eps');
+    delete('std_explained.jpg');
 end
 %%
 
+figure1 =  mfig('Digits: Attribute Correlation');  clf;
+set(figure1,'DefaultTextInterpreter', 'latex')
+imagesc(corr(Data))
+axis image
+colormap gray
+xlim([0 size(Data,2)])
+%%
 % Compute the projection onto the principal components
 ridx = 1:length(U);
 Z = U(ridx,:)*S;
@@ -172,7 +186,7 @@ mfig(['Digits: PCA']); clf; hold all;
 C = length(classNames);
 for c = 0:C-1
     Xc = [ Z(Labels(ridx)==c,co(1)) Z(Labels(ridx)==c,co(2))];%  Z(Labels(ridx)==c,3)];
-   % plot(Z(Labels(ridx)==c,1), Z(Labels(ridx)==c,2), 'o');
+%    plot(Z(Labels(ridx)==c,1), Z(Labels(ridx)==c,2), 'o');
     error_ellipse(cov(Xc),'conf',0.75,'mu',mean(Xc),'style','-');
 end
 legend(classNames);
@@ -180,6 +194,18 @@ xlabel('PC1');
 ylabel('PC2');
 zlabel('PC3');
 title('PCA of digits data');
+%%
+N = 2000;
+ridx = randi([1,length(Data)],N,1);  
+Z = U(ridx,:)*S;
+
+mfig(['Digits: Test']); clf; hold all;
+C = length(classNames);
+co = {'r','y','b','g'};
+for c = 0:3
+     plot(Z(Labels(ridx)==c,1:10)',co{c+1})
+   % plot(1:10, Z(Labels(ridx)==c,1:10), 'o');
+end
 
 %%
 %S = 60;M = 1;N =10; C((S-M*N+N-1),(N-1)) / C(S+N-1,(N-1))
