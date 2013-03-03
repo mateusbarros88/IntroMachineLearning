@@ -14,7 +14,7 @@ conf_val = [1 0.975 0.95 0.90 0.80 0.60];
 % radials in-out out-in profiles)].
 mode = 2;
 % cache feature data;
-cache = 1; reset = 0; saveimgs = 0;
+cache = 1; reset = 0; saveimgs = 1;
 % rng(202322)) for report images.
 rng(202322);
 %% Load Data
@@ -106,16 +106,25 @@ set(figure1,'DefaultTextInterpreter', 'latex')
 
 
 N = 2000;
+rng(202322);
 ridx = randi([1,length(Data)],N,1);  
-
+n = hist(sortLabels);
+nn = cumsum(n);
 
 [sortLabels sortIdx] = sort(Labels(ridx));
 corrm = corr(Data(ridx,:)');
 imagesc(corrm(sortIdx,sortIdx))%dont translate to get attribute corralation
+test = corrm(sortIdx,sortIdx);
+for r = 1:10
+    for c = 1:10
+        str = sprintf('%.2f',mean(mean(test(nn(r)-n(r)+1:nn(r),nn(c)-n(c)+1:nn(c)))));
+        text(nn(c)-n(c)/2,nn(r)-n(r)/2,str,'FontSize',15,'FontWeight','bold','HorizontalAlignment','center');
+    end
+end
+%caxis([-1 1])
+colormap hot
 
 
-n = hist(sortLabels);
-nn = cumsum(n);
 
 set(gca,'XTick', nn-n/2);
 set(gca,'XTickLabel',classNames); 
@@ -148,17 +157,16 @@ standalizedData = bsxfun(@rdivide, standalizedData, std(Data(ridx,:)));
 imagesc(max(min(standalizedData(sortIdx,:),3),-3));
 colormap(hot);
 
-set(gca,'XTick', [28/2 28/2+28 28*2+72/2 28*2+72+72]);
-
-set(gca,'XTickLabel',{'H-Hist','V-Hist','Radial Profile','In-Out / Out-in'}); 
+set(gca,'XTick', [28/2 28/2+28 28*2+72/2 28*2+72+72/2  28*2+72+72+72/2]);
+set(gca,'XTickLabel',{'V-Hist','H-Hist','Radial Histogram','In-Out','Out-in'}); 
 set(gca,'YTick', nn-n/2);
 set(gca,'YTickLabel',classNames);
 %set(gca,'DataAspectRatio',[1 1 1 ]);
 axis equal square
-xlim([0 size(Data,2)])
+xlim([1 size(Data,2)])
 cb = colorbar('peer',gca);
 ylabel(cb, 'Std')
-title('The std map of 2000 samples column standalized to zero mean and unit std.');
+title('The std map of 2000 samples column standardized to zero mean and unit std.');
 xlabel('Attributes');
 ylabel('2000 Samples');
 if saveimgs
@@ -175,8 +183,16 @@ figure1 =  mfig('Digits: Attribute Correlation');  clf;
 set(figure1,'DefaultTextInterpreter', 'latex')
 imagesc(corr(Data))
 axis image
-colormap gray
+colormap hot
 xlim([0 size(Data,2)])
+set(gca,'XTick', [28/2 28/2+28 28*2+72/2 28*2+72+72/2  28*2+72+72+72/2]);
+set(gca,'XTickLabel',{'V-Hist','H-Hist','Radial Histogram','In-Out','Out-in'}); 
+set(gca,'YTick', [28/2 28/2+28 28*2+72/2 28*2+72+72/2  28*2+72+72+72/2]);
+set(gca,'YTickLabel',{'V-Hist','H-Hist','Radial Histogram','In-Out','Out-in'}); 
+xlabel('Attributes')
+ylabel('Attributes')
+cb = colorbar('peer',gca);
+title('The Correlation between attributes');
 %%
 % Compute the projection onto the principal components
 ridx = 1:length(U);
