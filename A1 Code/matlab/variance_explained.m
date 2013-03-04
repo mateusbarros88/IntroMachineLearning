@@ -23,7 +23,7 @@ addpath(datapath);
 if ~cache || ~exist('data_cache.mat','file') || reset
     [Data, nrows, ncols] = loadMNISTImages( ...
         [datapath 'train-images-idx3-ubyte/train-images.idx3-ubyte'] );
-    
+    ims = reshape(Data,nrows,ncols,size(Data,2));   
     if mode ~= 0
         Data = feature_extraction( Data , nrows , ncols , mode )';
     end
@@ -31,7 +31,7 @@ if ~cache || ~exist('data_cache.mat','file') || reset
         delete data_cache.mat;
     end
     if cache
-        save('data_cache.mat','Data','nrows','nrows');
+        save('data_cache.mat','Data','nrows','nrows','ims');
     end
 else
     load data_cache;
@@ -221,6 +221,32 @@ xlabel('PC1');
 ylabel('PC2');
 zlabel('PC3');
 title('PCA of digits data');
+%% BETTER PC1 vs PC2 Plot
+mfig(['Digits: Projections']); clf; hold all; 
+rng(202322);
+Z = U*S;
+C = length(classNames);
+N=100;
+idx = zeros(N,C);
+[1 0 0]
+scale = 1;
+map = zeros(2000,2000,3);
+for c = 0:C-1
+    allidx = find(Labels==c);    
+    idx = allidx(randi([1,length(allidx)],N,1));
+    Xc = [ Z(idx,1) Z(idx,2)]*scale;
+    size(Xc)
+    length(idx)
+    for n = 1:length(Xc);
+       % (round(Xc(n,2))-14:round(Xc(n,2))+13)+1000
+       % (round(Xc(n,1))-14:round(Xc(n,1))+13)+1000
+    map(  (round(Xc(n,2))-14:round(Xc(n,2))+13)+1000, (round(Xc(n,1))-14:round(Xc(n,1))+13)+1000,: ) = repmat(ims(:,:,idx(n))/255,[1 1 3]);
+    %imagesc([Xc(n,1)-14.5 Xc(n,1)+14.5],[Xc(n,2)-14.5 Xc(n,2)+14.5], repmat(ims(:,:,idx(n))/255,[1 1 3]));
+
+    end
+    image(map);
+    colormap(gray)
+end
 %%
 N = 50000;
 ridx = 1:length(Data) ;%randi([1,length(Data)],N,1)  
