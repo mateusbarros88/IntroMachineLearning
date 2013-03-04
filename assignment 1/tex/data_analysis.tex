@@ -7,7 +7,7 @@ In this chapter a detailed explanation of the attributes will be given. It will 
 \section{Basic Statistic Properties}
 By means of the ACCENT\footnote{Apprehension, clarity, consistency, efficiency, necessity and truthfulness} principles some interesting figures have been made in Matlab to illustrate some properties of the data. Some summary statistics have also been omitted as them not contributing any further information for this dataset. An example of this is computing the mean and standard deviation(std). Instead the std have been computed from standardized data, for 2000 randomly drawn samples, and plotted in Figure~\ref{fig:1b}. 
  
-\begin{figure}[hbtp]
+\begin{figure}[H]
 \begin{minipage}[t]{.49\linewidth}
 \centering
 \includegraphics[width=\linewidth]{corr_explained}
@@ -27,7 +27,7 @@ From Figure~\ref{fig:1b} some properties can be seen. One example would be the c
 \subsection{Correlation}
 In Figure~\ref{fig:1a} the correlation of samples have been computed and sorted by classes. Furthermore the mean value for each class by class square box have been computed and plotted on top for truthfulness when colours fails. It can been seen that classes has some correlation with the other classes, but important is that each class is mostly correlated with its own class. The fact that some classes do not correlate a lot to itself is likely based on the fact that people tend to write this digit in many different ways (i.e. the digit 4).
 
-\begin{figure}[hbtp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.49\linewidth]{att_corr_explained}
 \caption{The correlation of attributes. Conclusion: Highly correlated and dimension can be reduced.\label{fig:att_corr_explained}}
@@ -36,8 +36,5 @@ In Figure~\ref{fig:1a} the correlation of samples have been computed and sorted 
 It can also be very interesting to look at correlation between attributes, as shown in Figure~\ref{fig:att_corr_explained}. It's seen that the attributes are highly correlated in parts of the plot and it also make sense when looking back on the feature generation. The histograms correlate and some kind of symmetry is shown in the figure. This could very well be explained by the fact that a lot of the digits actually also have symmetric parts. Instead of speculating in such relationships, a PCA will be used to find the real dimension of the data.  
 
 
-\section{Principal Component Analysis}
-\fixme{The amount of variation explained as a function of the number of PCA com- ponents included}
-\fixme{the principal directions of the considered PCA components}
-\fixme{the data projected onto the considered principal components}
-\input{\texdir pca}
+
+\inputtex{pca}
