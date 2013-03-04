@@ -222,7 +222,7 @@ ylabel('PC2');
 zlabel('PC3');
 title('PCA of digits data');
 %% BETTER PC1 vs PC2 Plot
-mfig(['Digits: Projections']); clf; hold all; 
+figure1 = mfig(['Digits: Projections']); clf; hold all; 
 set(figure1,'DefaultTextInterpreter', 'latex');
 rng(202322);
 Z = U*S;
