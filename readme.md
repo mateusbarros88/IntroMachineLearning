@@ -13,6 +13,6 @@ Data: Feature extraction, and visualization
 ----------------------------------------------
 Deadline: 5th of March 2013.
 
-We are working with the MNISK Digit Dataset and this section will involve feature extraction and some basic statistics analysis of the data/features.
+We are working with the MNIST Digit Dataset and this section will involve feature extraction and some basic statistics analysis of the data/features.
 
 
