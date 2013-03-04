@@ -221,17 +221,77 @@ ylabel('PC2');
 zlabel('PC3');
 title('PCA of digits data');
 %%
-N = 2000;
-ridx = randi([1,length(Data)],N,1);  
+N = 50000;
+ridx = 1:length(Data) ;%randi([1,length(Data)],N,1)  
 Z = U(ridx,:)*S;
-
-mfig(['Digits: Test']); clf; hold all;
+clear pcs Q
+mfig(['Digits: Test']);  clf; hold all;
+set(figure1,'DefaultTextInterpreter', 'latex')
 C = length(classNames);
-co = {'r','y','b','g'};
-for c = 0:3
-     plot(Z(Labels(ridx)==c,1:10)',co{c+1})
+N = 5;
+co = jet(10);%{'r','y','b','g'};
+labels = [0 1 2]
+for cc = 1:4
+subplot(2,2,cc)
+
+for c = 1:3
+   % size(Z(Labels(ridx)==c,1:10)')
+   pcs = Z(Labels(ridx)==labels(c),1:N);
+   %  plot(Z(Labels(ridx)==c,1:10)','color',co(c+1,:))
+   %plot(1:N,mean(pcs),'.','color',co(c+1,:))
+   if 0
+   text(((c+1)/3:N),mean(pcs),['\mu_' num2str(labels(c)) ])
+   text((1:N),mean(pcs)+std(pcs)*2,['\sigma_' num2str(labels(c)) ])
+   text((1:N),mean(pcs)-std(pcs)*2,['\sigma_' num2str(labels(c)) ])
+   line([1:N;1:N],[mean(pcs)-std(pcs)*2 ;mean(pcs)+std(pcs)*2], 'color',co(c+1,:))
+   else
+   % STEP 1 - rank the data
+    y = sort(pcs);
+for n = 1:N
+% compute 25th percentile (first quartile)
+    Q(1,n) = median(y(find(y(:,n)<median(y(:,n))),n));
+
+% compute 50th percentile (second quartile)
+    Q(2,n) = median(y(:,n));
+
+% compute 75th percentile (third quartile)
+    Q(3,n) = median(y(find(y(:,n)>median(y(:,n))),n));
+
+% compute Interquartile Range (IQR)
+    IQR(n) = Q(3,n)-Q(1,n);
+
+% compute Semi Interquartile Deviation (SID)
+% The importance and implication of the SID is that if you 
+% start with the median and go 1 SID unit above it 
+% and 1 SID unit below it, you should (normally) 
+% account for 50% of the data in the original data set
+    SID = IQR/2;
+   text(n-1+(c+2)/4+0.01,Q(2,n),['\mu^' num2str(labels(c)) ''])
+   text(n-1+(c+2)/4+0.01,Q(1,n),['p_{25}^' num2str(labels(c)) ])
+   text(n-1+(c+2)/4+0.01,Q(3,n),['p_{75}^' num2str(labels(c)) ])
+   line([n;n]-1+(c+2)/4,[Q(1,n);Q(3,n)], 'color',co(c+1,:))
+   end
+   end
+   
+   
+     %boxplot(Z(Labels(ridx)==c,1:10));
    % plot(1:10, Z(Labels(ridx)==c,1:10), 'o');
 end
-
+set(gca,'XTick', 1:N);
+set(gca,'XTickLabel',{'PC1','PC2','PC3','PC4','PC5','PC6','PC7','PC8','PC9','PC10'}); 
+%set(gca,'YTick', [28/2 28/2+28 28*2+72/2 28*2+72+72/2  28*2+72+72+72/2]);
+%set(gca,'YTickLabel',{'V-Hist','H-Hist','Radial Histogram','In-Out','Out-in'}); 
+xlim([0.5 N+0.5])
+ylim([-20 15])
+labels = labels+2;
+end
+if saveimgs
+    print -depsc pca_projections_explained
+    copyfile('pca_projections_explained.eps','../../conf/img/pca_projections_explained.eps');
+    print -djpeg pca_projections_explained
+    copyfile('pca_projections_explained.jpg','../../conf/img/pca_projections_explained.jpg');
+    delete('pca_projections_explained.eps');
+    delete('pca_projections_explained.jpg');
+end
 %%
 %S = 60;M = 1;N =10; C((S-M*N+N-1),(N-1)) / C(S+N-1,(N-1))
