@@ -1,5 +1,4 @@
 \section{Machine Learning}
-\fixme{Answer the questions about how machine learning can be applied to our data.}
 %What is the problem of interest.
 %Where did we obtain the data.(already answered)
 %What have been done to the data before(A lot, but havent written much about it. People are using it still for benchmarks and people are down to less than 40 errors of the 10000 test examples))
@@ -7,8 +6,16 @@
 % THIS SECTION SHOULD BE ABOUT
 %Explain what the primary machien learning modeling aim is as well as how you envision the data can be analysed in therms of; a classification, a regression a clustering, and association mining and an anomaly detection problem. (You need to outline how all the methods may be applied to your data)
 
-The main task of this dataset is to classify the correct digit label to all of the 10.000 test digits from training a mapping function from our input features to a label of zero to nine. It was one of the tasks to find a dataset that could be used through the course for all learning tasks.
-For regression and Associative mining it could be interesting to find missing attributes that have been removed as the dataset are complete with no missing attributes. For abnormally detection it could be interesting to tell if a digit is abnormal. Maybe we could create some reflections of some numbers and see if we can detect those. 
-Clustering could be used to find clusters within one digit class. There are a lot of different ways to write the same digits and it could be interesting to cluster all the digits of one class to see if there exist 1,2 or K different ways to write that digit. Such analysis could also have been done in this report by PCA which would give good visualization of the groups.
-In our dataset we have a lot of labelled data, but if that’s not the case one could have used clustering for examination of unlabeled data to find information about the distributions of clusters. Then when applying the small amount of labeled data to these clusters one would be able to tell something about the test examples close to those distributions.
-It was mentioned earlier that publications of the past years are mostly neural networks on our dataset and with those networks people have been able to take the raw pixel features and detect the features as the first step in the learning algorithm. This have mainly been referred to as deep learning when searching online. That would also be an interesting topic to dive into.
+One of the tasks for this assignment was to find a data set that could be used through the course for all of the coming machine learning tasks. Following is a short explanation on how we could approach each of these techniques for the future reports. \\
+
+The main task of this data set is to \emph{classify} the correct digit label to all of the 10.000 test digits by training a mapping function to go from our input features to a specific class label of zero to nine. 
+
+Regarding \emph{regression} and \emph{associative mining} then it could be interesting to find missing attributes. However, since our data set does not have any missing attributes, we could manually remove one or more and try to \textit{re-find} it by these processes. 
+
+For \emph{anomaly detection} it could be interesting to tell if a digit has been abnormally drawn compared to the \textit{normal} or more standard way of drawing it. We could possibly create some different reflections of or changes to some numbers and see if we can detect those from the rest of the data set. 
+
+\emph{Clustering} could be interesting to find within one digit class. There are a lot of different ways to write the same digit, and it could be quite interesting to cluster all the digits of one class to see if there there 1, 2 or $K$ distinctly different ways to write that specific digit. Such analysis could also have been done in this report by doing PCA within a single class, which could give good visualization of the groups for it. 
+
+In our data set we have a lot of labelled data, but if that's not the case one could have used clustering for examination of unlabelled data to find information about the distributions of clusters. Then when applying the small amount of labelled data to these clusters one would be able to tell certain characteristics about the test examples close to those distributions. \\
+
+It was mentioned earlier that publications of the past years are mostly neural networks on our data set and with those networks people have been able to take the raw pixel features and detect the features as the first step in the learning algorithm. This has mainly been referred to as deep learning when searching online and it would also be an interesting topic to dive into.
