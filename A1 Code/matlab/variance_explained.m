@@ -14,7 +14,7 @@ conf_val = [1 0.975 0.95 0.90 0.80 0.60];
 % radials in-out out-in profiles)].
 mode = 2;
 % cache feature data;
-cache = 1; reset = 0; saveimgs = 1;
+cache = 1; reset = 0; saveimgs = 0;
 % rng(202322)) for report images.
 rng(202322);
 %% Load Data
@@ -156,7 +156,8 @@ set(figure1,'DefaultTextInterpreter', 'latex')
 standalizedData = bsxfun(@minus, Data(ridx,:), mean(Data(ridx,:)));
 standalizedData = bsxfun(@rdivide, standalizedData, std(Data(ridx,:)));
 imagesc(max(min(standalizedData(sortIdx,:),3),-3));
-colormap(hot);
+
+colormap hot
 
 set(gca,'XTick', [28/2 28/2+28 28*2+72/2 28*2+72+72/2  28*2+72+72+72/2]);
 set(gca,'XTickLabel',{'V-Hist','H-Hist','Radial Histogram','In-Out','Out-in'}); 

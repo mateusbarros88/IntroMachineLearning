@@ -14,7 +14,7 @@ conf_val = [1 0.975 0.95 0.90 0.80 0.60];
 % radials in-out out-in profiles)].
 mode = 2;
 % cache feature data;
-cache = 1; reset = 0; saveimgs = 1;
+cache = 1; reset = 0; saveimgs = 0;
 % rng(202322)) for report images.
 rng(202322);
 %% Load Data
@@ -156,7 +156,9 @@ set(figure1,'DefaultTextInterpreter', 'latex')
 standalizedData = bsxfun(@minus, Data(ridx,:), mean(Data(ridx,:)));
 standalizedData = bsxfun(@rdivide, standalizedData, std(Data(ridx,:)));
 imagesc(max(min(standalizedData(sortIdx,:),3),-3));
-colormap(hot);
+cmap1 = [ones(128,1)*255 ones(128,1)*255 [1:2:255]' ]/255;
+cmap2 = [ [255:-4:1 1:4:255 ]' [255:-2:1]' [255:-2:1]' ]/255;
+colormap([cmap1;cmap2]);
 
 set(gca,'XTick', [28/2 28/2+28 28*2+72/2 28*2+72+72/2  28*2+72+72+72/2]);
 set(gca,'XTickLabel',{'V-Hist','H-Hist','Radial Histogram','In-Out','Out-in'}); 
@@ -284,6 +286,14 @@ set(gca,'XTickLabel',{'PC1','PC2','PC3','PC4','PC5','PC6','PC7','PC8','PC9','PC1
 xlim([0.5 N+0.5])
 ylim([-20 15])
 labels = labels+2;
+end
+if saveimgs
+    print -depsc pca_projections_explained
+    copyfile('pca_projections_explained.eps','../../conf/img/pca_projections_explained.eps');
+    print -djpeg pca_projections_explained
+    copyfile('pca_projections_explained.jpg','../../conf/img/pca_projections_explained.jpg');
+    delete('pca_projections_explained.eps');
+    delete('pca_projections_explained.jpg');
 end
 %%
 %S = 60;M = 1;N =10; C((S-M*N+N-1),(N-1)) / C(S+N-1,(N-1))
