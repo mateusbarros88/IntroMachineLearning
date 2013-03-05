@@ -123,9 +123,9 @@ axis image
 
 if saveimgs
     print -depsc epsFig
-    copyfile('epsFig.eps','../../conf/img/feature_examples369.eps');
+    copyfile('epsFig.eps','../../conf/img/feature_examples.eps');
     print -djpeg epsFig
-    copyfile('epsFig.jpg','../../conf/img/feature_examples369.jpg');
+    copyfile('epsFig.jpg','../../conf/img/feature_examples.jpg');
     delete('epsFig.eps');
     delete('epsFig.jpg');
 end
@@ -136,29 +136,3 @@ image(ims(:,:,1)),colormap gray
 subplot(1,2,2)
 
 bar(Data1);
-%%
-clc
-B1 = ims(:,:,find(Labels==0,1));
- B = Data(find(Labels==0,1),:)';
- A = feature_extraction( B , nrows , ncols , 2 );
- 
-T = zeros(1,28*2);
-T(28) = 1;
-
-Z = [];
- for n = 0:27
-     Z(n+1,:) = repmat(T(28-n:28+27-n),1,28);
- end
- for n = 0:27
-     Z(28+n+1,:) = [zeros(1,28*n) ones(1,28) zeros(1,784-28*(n+1))];
- end
-
- 
- (B>128)'*Z'%[ones(1,28) zeros(1,784-28); zeros(1,28*7) ones(1,28) zeros(1,784-28*8) ]'
- A(1:28*2)'
-
- (Z*(B>128))' ==  A(1:28*2)'
- 
- %imagesc(reshape((Z \ A(1:28*2))',28,28))
- sum(abs((B>128)' - (Z \ A(1:28*2))'))
- imagesc(reshape((B>128),28,28))
