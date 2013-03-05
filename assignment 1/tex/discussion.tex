@@ -5,7 +5,7 @@ We do not have very meaningful attributes when they stand by themselves, i.e. th
 
 The data set has also shown to be quite viable for further analysis and for applying various machine learning techniques. We can already see ways of being able to classify most of the numbers with good reliability, and doing further modelling will only help in this regard.
 
-It should also be noted that the data have been projected on to the PCs and plotted with scatter plots, but to comply with the ACCENT principles the projections have been visualized as in Figure~\ref{fig:pca_projections_explained} for easier interpretation and at the end we modified the scatter plot such it draws the numbers instead of dots and the result can be seen in Figure~\ref{fig:pc_projections} to be interpreted. 
+It should also be noted that the data has been projected on to the PCs and plotted with scatter plots, but to comply with the ACCENT principles the projections have been visualized as in Figure~\ref{fig:pca_projections_explained} for easier interpretation. At the end we modified the scatter plot such that it draws the numbers instead of dots, and the more clear result can be seen in Figure~\ref{fig:pc_projections}. 
 
 \begin{figure}[H]
 \centering
@@ -13,20 +13,26 @@ It should also be noted that the data have been projected on to the PCs and plot
 \caption{Equal amount of samples from each class was sampled, $N=500$, and then drawn at random if and only if no other digit had been printed at the location in the map. \label{fig:pc_projections}}
 \end{figure}
   
-One should keep in mind that only the median and 25, 75 percentiles are illustrated and there will be some of the data overlapping. This was also why scatter plots haven’t been used, because a decision about how many samples to plot was needed. Too many would lead to a chaotic plot where some samples disappear behind others and too few do not illustrate the spread well enough. Therefore computing summery statistics over the hole dataset and showing the properties where preferred. It was also experimented with showing mean and confident value given by three times the standard deviation for the distributions instead of the median.
+One should keep in mind that only the median and 25, 75 percentiles are illustrated and there will be some of the data overlapping. This was also why scatter plots hasn’t been used, because a decision about how many samples to plot was needed. Too many would lead to a chaotic plot where some samples simply disappear behind others, and too few does not illustrate the spread well enough. Therefore computing summery statistics over the whole data set and showing the properties where preferred is the path we took. It was also experimented with showing mean and confident value given by three times the standard deviation for the distributions instead of the median.
 
-For the PCA the dataset was standardized to mean 0 and unit standard deviation as this generated more intuitive results to interpretive as humans. A machine learning algorithm should be able to solve it either way if the data had only been normalized to zero mean. 
+For the PCA the data set was standardized to mean 0 and a single unit standard deviation as this generated more intuitive results to interpretive as humans. A machine learning algorithm should be able to solve it either way if the data had only been normalized to zero mean, so it works out. 
 
 \section{Conclusion}
 %Summarize that we have included all the relevant information from the questions raised in the assignment text and tell how good a job we have done.
 
-In this assignment we have answered the question raised:
+To conclude this report, we will reiterate our answers to the questions raised in the assignment:
 \begin{itemize}
-\item A description of your dataset\\ We have found an interesting dataset that is well explored within the machine learning area and there are great baselines to compare with. Furthermore we have given a brief outline about the features we extracted. We have talked about what interesting tasks that could be applied to it, where classification is the main task.
-\item A detailed explanation about the attributes of the data\\
-Together with the feature extraction there have also been given information about the attributes. In this case, one attribute do not hold much meaning alone but combined with the other attributes great information shows. This also means that not all summary statistics are interesting for individual attributes. Still we have shown the use of a lot of different statistics in the plots we shown, including median, correlation and therefore also mean and variance. Our dataset are high dimensional and our task have been to illustrate this in a simple way.
-\item Data visualizations based on suitable visualization techniques\\ We have as noted above, used correlation to illustrate some properties of the dataset. A PCA have also been carried out which gave some plots which makes it easier to understand the real dimensionality of the dataset.
-\item A discussion explaining what you have learned\\ We have given such discussion and further more experimented with some techniques that are not included as we didn’t find the plots living up to the ACCENT principles.
+\item \textbf{A description of your data set}\\ 
+We have found an interesting data set that is well explored within the machine learning area and there are great baselines to compare with. Furthermore we have given a brief outline about the features we have extracted. We have talked about what interesting tasks that could be applied to it, where classification will be the main task.
+
+\item \textbf{A detailed explanation about the attributes of the data}\\
+Together with the feature extraction there has also been given information about the many attributes. In this case, a single attribute does not hold much meaning alone, but combined with the other attributes we can get a wealth of information. This also means that not all summary statistics are interesting for individual attributes. Still we have shown the use of a lot of different statistics in the plots we shown, including median, correlation and therefore also mean and variance. Our data set is high dimensional and a big task for us is to illustrate this in a simple and clear way.
+
+\item \textbf{Data visualizations based on suitable visualization techniques}\\
+We have as noted above, used correlation to illustrate some properties of the data set. A PCA have also been carried out which gave some plots that makes it easier to understand the real big variances and clusters of the data set.
+
+\item \textbf{A discussion explaining what you have learned}\\ 
+We have given such discussion and further more experimented with some techniques that are not included as we didn’t find the plots living up to the ACCENT principles.
 \end{itemize}
 
 All in all we think we have answered the question raised and think we found good solutions for the topics in this assignment.
