@@ -94,7 +94,7 @@ end
 %%
 load cv_split
 %X_train = X_train(1:10000,:);
-%y_train = y_train(1:10000);
+y_train = y_train(1:10000);
 %classLabels_train(1:10000);
 %CV = cvpartition(classLabels_test, 'Kfold',5);
 K = CV.NumTestSets;
@@ -134,7 +134,7 @@ end
 %save '5fold_10000samples_error_knn.mat' 'CV' 'Error'
 %save '5fold_60000samples_error_knn_L2_5.mat' 'CV' 'Error'
 mfig('Error rate');
-plot(L,sum(Error)./sum(CV.TestSize)*100);
+plot(1:size(Error,2),sum(Error)./sum(CV.TestSize)*100);
 xlabel('Number of neighbors');
 ylabel('Classification error rate (%)');
 
