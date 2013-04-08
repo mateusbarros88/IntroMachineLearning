@@ -16,4 +16,4 @@ Deadline: 5th of March 2013.
 We are working with the MNIST Digit Dataset and this section will involve feature extraction and some basic statistics analysis of the data/features.
 
 
-![PCA](https://raw.github.com/mktange/IntroMachineLearning/master/assignment 1/img/pc_projections.jpg)
+![PCA](https://raw.github.com/mktange/IntroMachineLearning/master/assignment1/img/pc_projections.jpg)
