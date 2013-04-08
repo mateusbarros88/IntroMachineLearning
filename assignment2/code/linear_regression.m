@@ -12,9 +12,6 @@ load data_cache
 Labels = loadMNISTLabels( ...
     [datapath 'train-labels-idx1-ubyte/train-labels.idx1-ubyte'] );
 
-
-attributeNames = [57:129];
-
 % This anonymous function takes as input a training and a test set. 
 %  1. It fits a generalized linear model on the training set using glmfit.
 %  2. It estimates the output of the test set using glmval.
@@ -27,20 +24,35 @@ clear ims nrows
 
 %% Pick a number and attribute to predict
 num = 4;
-attr = 10;
+attr = 5;
 
 % Extract only data matching the picked number
-X = Data(ismember(Labels, num),attributeNames);
+% X = Data(ismember(Labels, num),1:56); % Vert+hori
+X = Data(ismember(Labels, num),57:128); % radials
+% X = Data(ismember(Labels, num),129:272); % In-out out-in
+
+% Combine attributes
+[N,M] = size(X);
+c = 4;
+combinedData = nan(N, M/c);
+for i=1:M/c,
+    range = 1+(i-1)*c:i*c;
+    combinedData(:,i) = sum(X(:,range),2);
+end;
+X = combinedData;
+
 
 % Extract the attribute we want to predict
 y = X(:,attr);
 X(:,attr) = [];
-[N M] = size(X);
+[N,M] = size(X);
 
-clear Data Labels num attr
+attributeNames = 1:length(X(1,:));
+
+clear Labels num attr i c range
 
 %% Setup cross-validation
-K = 5;
+K = 3;
 CV = cvpartition(N, 'Kfold', K);
 
 % Initialize variables
