@@ -24,22 +24,23 @@ clear ims nrows
 
 %% Pick a number and attribute to predict
 num = 4;
-attr = 5;
+attr = 50;
 
 % Extract only data matching the picked number
 % X = Data(ismember(Labels, num),1:56); % Vert+hori
-X = Data(ismember(Labels, num),57:128); % radials
-% X = Data(ismember(Labels, num),129:272); % In-out out-in
+% X = Data(ismember(Labels, num),57:128); % radials
+X = Data(ismember(Labels, num),129:200); % In-out
+% X = Data(ismember(Labels, num),201:272); % Out-in
 
 % Combine attributes
-[N,M] = size(X);
-c = 4;
-combinedData = nan(N, M/c);
-for i=1:M/c,
-    range = 1+(i-1)*c:i*c;
-    combinedData(:,i) = sum(X(:,range),2);
-end;
-X = combinedData;
+% [N,M] = size(X);
+% c = 4;
+% combinedData = nan(N, M/c);
+% for i=1:M/c,
+%     range = 1+(i-1)*c:i*c;
+%     combinedData(:,i) = sum(X(:,range),2);
+% end;
+% X = combinedData;
 
 
 % Extract the attribute we want to predict

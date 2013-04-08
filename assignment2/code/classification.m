@@ -7,35 +7,27 @@ addpath(['../../Toolbox/MBox']);
 addpath(['../../Toolbox/']);
 addpath(datapath);
 
-load data_cache
+load data_cache_2
 
-Labels = loadMNISTLabels( ...
-    [datapath 'train-labels-idx1-ubyte/train-labels.idx1-ubyte'] );
-
-classNames = {'0';'1';'2';'3';'4';'5';'6';'7';'8';'9';'10'};
-classLabels = classNames(Labels+1);
+classLabels = classNames(Y_train+1);
 
 clear ims nrows
 
 %% Data specification
 
-X = Data;
-y = Labels;
+X = X_train;
 
-[N M] = size(X);
-attributeNames = int2str([1:M]');
+[N,M] = size(X);
 
 clear Data Labels
 
 %% Decision Tree
-% Number of folds for crossvalidation
-K = 5;
-
-% Create holdout crossvalidation partition
-CV = cvpartition(classNames(y+1), 'Kfold', K);
+load cv_split;
+% CV = cvpartition(classNames(y+1), 'Kfold', K);
+K = CV.NumTestSets;
 
 % Pruning levels
-prune = 0:10;
+prune = 0:50;
 
 % Variable for classification error
 Error_train = nan(K,length(prune));
@@ -50,20 +42,22 @@ for k = 1:K
     X_test = X(CV.test(k), :);
     y_test = y(CV.test(k));
 
+    tic
     % Fit classification tree to training set
-    T = classregtree(X_train, classNames(y_train+1), ...
+    T{k} = classregtree(X_train, classNames(y_train+1), ...
         'method', 'classification', ...
         'splitcriterion', 'gdi', ...
         'categorical', [], ...
         'names', attributeNames, ...
         'prune', 'on', ...
         'minparent', 10);
-
+    toc
     % Compute classification error
     for n = 1:length(prune) % For each pruning level
-        Error_train(k,n) = sum(~strcmp(classNames(y_train+1), eval(T, X_train, prune(n))));
-        Error_test(k,n) = sum(~strcmp(classNames(y_test+1), eval(T, X_test, prune(n))));
+        Error_train(k,n) = sum(~strcmp(classNames(y_train+1), eval(T{k}, X_train, prune(n))));
+        Error_test(k,n) = sum(~strcmp(classNames(y_test+1), eval(T{k}, X_test, prune(n))));
     end
+    toc
 end
 
 % Plot classification error
