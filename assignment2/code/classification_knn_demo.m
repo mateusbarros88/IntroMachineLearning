@@ -19,6 +19,7 @@ cache = 1; reset = 0; saveimgs = 0;
 rng(202322);
 %% Load Data
 
+classNames = {'0';'1';'2';'3';'4';'5';'6';'7';'8';'9';'10'};
 if ~cache || ~exist('data_cache_2.mat','file') || reset
     [X_train] = loadMNISTImages( ...
         [datapath 'train-images-idx3-ubyte/train-images.idx3-ubyte'] );
@@ -29,22 +30,21 @@ if ~cache || ~exist('data_cache_2.mat','file') || reset
     if mode ~= 0
         X_train = feature_extraction( X_train , nrows , ncols , mode )';
         X_test = feature_extraction( X_test , nrows , ncols , mode )';
+        Y_train = loadMNISTLabels( ...
+            [datapath 'train-labels-idx1-ubyte/train-labels.idx1-ubyte'] );
+        Y_test = loadMNISTLabels( ...
+            [datapath 't10k-labels-idx1-ubyte/t10k-labels.idx1-ubyte'] );
     end
     if reset
         delete data_cache_2.mat;
     end
     if cache
-        save('data_cache_2.mat','X_train','X_test','nrows','nrows');
+        save('data_cache_2.mat','X_train','X_test','Y_test','Y_train','classNames');
     end
 else
     load data_cache_2;
 end
 
-Y_train = loadMNISTLabels( ...
-    [datapath 'train-labels-idx1-ubyte/train-labels.idx1-ubyte'] );
-Y_test = loadMNISTLabels( ...
-    [datapath 't10k-labels-idx1-ubyte/t10k-labels.idx1-ubyte'] );
-classNames = {'0';'1';'2';'3';'4';'5';'6';'7';'8';'9';'10'};
 classLabels_train = classNames(Y_train+1);
 classLabels_test = classNames(Y_test+1);
 
@@ -91,3 +91,4 @@ if saveimgs
     %%delete('epsFig.eps');
     %%delete('epsFig.jpg');
 end
+%%
