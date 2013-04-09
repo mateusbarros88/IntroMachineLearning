@@ -13,7 +13,11 @@ There have been looked into a few different methods for classification and by me
 
 \subsection{Decision Trees}
 Since we have a lot of attributes, which do not hold any significant meaning besides an seemingly arbitrary integer value, the decision tree solution is likely to not be very precise in determining the class. It will also be quite a bit tree since it has to value in each  of the different attributes, and determine what the meaning of that specific attribute might be in the classification.
-
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{code/decision_tree_pruning}
+\caption{test\label{fig:linf}}
+\end{figure}
 
 \subsection{K-Nearest Neighbors (KNN)}
 As the computation demand of KNN is significant larger then the other two, we first estimated parameters for a subset of the data and then did the same again for a smaller subset of the parameters. This way we was able to find the optimal parameter in feasible time.
