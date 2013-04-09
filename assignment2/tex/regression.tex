@@ -97,9 +97,27 @@ As noted in the two examples above, the features which have something to say abo
 % Fit an artificial neural network (ANN) model to the data.
 % (You could consider only fitting the ANN to the attributes that were selected
 % when you applied linear regression with forward selection).
+For both our examples we fitted an ANN models to the same data. We fitted all of our ANN models with just 10 hidden units, did 5-fold cross-validation and averaged their error rates. 
 
+\subsection*{In-out 50}
+The average error rate for the \texttt{'In-out 50'}:
 
-\section{Performance comparison}
+\begin{verbatim}
+Error rate: 0.012
+\end{verbatim}
+
+It already had a good error rate using basic linear regression, but it got even better with ANN from $0.06$ to $0.012$.
+
+\subsection*{In-out 31}
+For \texttt{'In-out 31'}:
+
+\begin{verbatim}
+Error rate: 0.035
+\end{verbatim}
+
+Which greatly improves the error rate compared to the linear regression. From a huge $0.57$ error rate on the test data, to only $0.035$!
+
+%\section{Performance comparison}
 % Statistically evaluate if there is a significant performance difference between
 % the fitted ANN and linear regression models based on the same cross-validation
 % splits (i.e., use a paired t-test). Compare in addition if the performance of your

@@ -6,7 +6,7 @@ addpath('../../Toolbox/MBox');
 addpath('../../Toolbox/');
 addpath('../../MNIST Dataset/');
 
-load linear_regression_attr31 'Features' 'X' 'y' 'N' 'attributeNames'
+load linear_regression_attr50 'Features' 'X' 'y' 'N' 'attributeNames'
 Features = logical(Features);
 
 [~,ind] = min(sum(Features,2));
