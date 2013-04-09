@@ -55,7 +55,7 @@ attributeNames = 1:length(X(1,:));
 clear Labels num attr  c range
 
 %% Setup cross-validation
-K = 3;
+K = 10;
 CV = cvpartition(N, 'Kfold', K);
 
 % Initialize variables
