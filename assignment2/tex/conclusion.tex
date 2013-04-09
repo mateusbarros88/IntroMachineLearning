@@ -1,30 +1,31 @@
 \chapter{Discussion}
 \subsection{Regression}
-In this assignment we had some difficulties with the topic of regression. All the features are arbitrary numbers and do not make much sense independent of the others. We choose to try out forward selection but found out that the dataset of 60000 samples and 272 features took a lot of time. Instead we decided to only take out one of the feature groupings, the In-Out profile and also only to look at one number. We picked digit 4.
+In this assignment we had some difficulties with the topic of regression. All the features are arbitrary numbers and do not make too much sense independent of the others. We choose to try out forward selection, but found that the data set of 60,000 samples and 272 features took a lot of time. Instead we decided to only take out one of the feature groupings, in our case the In-Out profile and also only to look at one number. We picked digit 4.
 
-Recall from assignment one we saw that features was highly correlated to the neighbor features. The was collected by steps of 5 degree and the distance from center to the first on pixel. 
+Recall from assignment one we saw that features was highly correlated to its neighboring features. The was collected by steps of 5 degree and the distance from center to the first on pixel. 
 
-Not surprising this means that the forward selection tend to going forward until it finds one of these neighbors. If we should do this again, we would try to detect one feature from one grouping based on the another groping. 
+Not surprising this means that the forward selection tend to going forward and picks atleast one or more of these neighbors. If we should do this again, we would try to detect one feature from one grouping based on the another groping and see how viable this would be. 
 
 \subsection{Classification}
-Classification is the task that extensively have been carried out by other scientists. One of the newest records on the dataset are below 40 errors of the 10000 test set. These results was found by deep neural networks and by generating random transformation and rotation of the data for each epocs. The architecture for these nets can be up to 5 levels and have over 1000 hidden units in some layers. Inspired by this we knew that we wouldn't beat that with our simpler models. 
+Classification is the task that extensively have been carried out by other scientists. One of the newest records on the data set are below 40 errors of the 10,000 test set. These results was found by deep neural networks and by generating random transformation and rotation of the data for each epocs. The architecture for these nets can be up to 5 levels and have over 1,000 hidden units in some layers. Inspired by this we knew that we wouldn't beat that with our simpler models. 
 
-We found out that just fitting some of the simple neural networks on our data took extensive amounts of time and we refined our goals to learning how to evaluate the models vs each other. We trained a model based on Naive Bayes, Decision Trees and KNN. Finding that the KNN was the slowest of these. This also makes sense as it simplify the distribution of objects in parameter space, and we have to evaluate a new observation to all test objects.
+We found out that just fitting some of the simple neural networks on our data took extensive amounts of time, and we refined our goals to learning how to evaluate the models versus each other. We trained a model based on Naive Bayes, Decision Trees and KNN. Finding that the KNN was the definite slowest of these. This also makes sense as it simplify the distribution of objects in parameter space, and we have to evaluate a new observation to all test objects.
 
-We found the results of the KNN parameter estimation counter intuitive. We used cross validation to find the optimal parameter for number of neighbors, and to our surprise it quite fast started to get worse when more neighbors was added. As the method being computation demanding on the 60k samples, we sampled 10000 observations uniform and ran the cross validation over a larger span of the parameter value for how many neighbors and then did it again on the full data set for a smaller range. We managed to find a optimal parameter of 4.
+We found the results of the KNN parameter estimation counter intuitive. We used cross-validation to find the optimal parameter for number of neighbors, and to our surprise it quite fast started to get worse when more neighbors was added. As the method being computation demanding on the 60,000 samples, we sampled 10,000 observations uniform and ran the cross validation over a larger span of the parameter value for how many neighbors and then did it again on the full data set for a smaller range. We managed to find a optimal parameter of 4.
 
 \subsection{Performance} 
-We found the optimal parameter space for each method in a inner cross validation step and then did an outer five fold cross validation for these parameters and by paired t-tests we evaluated if one model was significant worse then the others. Technically we evaluate if they are significant differently, and if so one is worse then the other.
+We found the optimal parameter space for each method in a inner cross validation step and then did an outer 5-fold cross validation for these parameters, and by paired t-tests we evaluated if one model was significant worse then the others. Technically we evaluate if they are significant differently, and if so one is worse then the other.
 
-We found that they all performed significantly different.
-
+We found that they all performed significantly different, which can also be determined by looking at each of their averaged error rates.
 
 
 \chapter{Conclusion}
 
-We have in this assignment played around with some interesting models. We are not fully satisfied with the result of the report as we ended up with less illustrations then wanted. Also we have found out that our choose in dataset could have been better. 
+We have in this assignment played around with some interesting models. We are not fully satisfied with the result of the report as we ended up with less illustrations than wanted. Also we have found out that our pick in data set could have been better regarding these problems. \\
 
-Lets elaborate a little on that. We first picked the dataset as we think it was nice to have a problem that we could relate to from our software technology bachelors. We also think it was nice that a lot of work had already been done and we could compare our work with this. We have solved the problem somewhat decent, but we still have a feeling that some of the questions raised in the assignments are not that easy to address on this dataset. One example is the regression stuff, but another one is also the fact that our features are arbitrary numbers. We now see how it could be beneficial to have a dataset like those we use in the exercises, as its easier to illustrate and explain how the models work.
+Let's elaborate a little on that. We picked the data set as we think it was nice to have a problem that we could relate to from our software technology bachelors perspective. We also think it was nice that a lot of work had already been done, and we could compare our work with this. We have solved the problems decently, but we still have a feeling that some of the questions raised in this assignment are not that easy to address with this particular data set. 
 
-We think we did a decent assignment with room for some improvements, and we will see if we can make up for it with the 3th report. 
+One example is the regression part, but another one is also the fact that our features are just seemingly arbitrary integer values. We now see how it could be beneficial to have a data set like those we use in the exercises where each feature has a specific and clear meaning, as its easier to illustrate and explain how the models work. \\
+
+We think we did a decent assignment with room for some improvements, and we will see if we can make up for it with the 3rd report. 
 

@@ -17,7 +17,7 @@ Since we have a lot of attributes, which do not hold any significant meaning bes
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\linewidth, trim= 0mm 70mm 0mm 70mm, clip]{code/decision_tree_pruning}
-\caption{Error rates for different pruning level for our decision tree. It shows that the optimal pruning level for this case is around 25-35.}
+\caption{Error rates (not percentage) for different pruning level for our decision tree. It shows that the optimal pruning level for this case is around 25-35.}
 \label{fig:dec_tree}
 \end{figure}
 
@@ -34,18 +34,18 @@ As the computation demand of KNN is significant larger then the other two, we fi
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\linewidth, trim= 0mm 30mm 0mm 30mm, clip]{code/5fold_knn_10000samples}
-\caption{The five fold cross validation for 10000 samples.\label{fig:knn_small}}
+\caption{The error rate in percentage for 5-fold cross validation for 10000 samples.\label{fig:knn_small}}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\linewidth, trim= 0mm 30mm 0mm 30mm, clip]{code/5fold_knn_60000samples}
-\caption{The cross validation for the full dataset.\label{fig:knn_large}}
+\caption{The error rate in percentage for 5-cross validation for the full dataset.\label{fig:knn_large}}
 \end{figure}
 
 
 
 \subsection{Naïve Bayes}
-We fitted a Naive Bayes model based on the exercise in doing so. It was quite fast but also had a average error rate of 15 \% in a 5 fold cross validation.
+We fitted a Naive Bayes model based on the exercise in doing so. It was quite fast but also had a average error rate of 15 \% in a 5 fold cross validation. Since the observations are almost uniformly distributed among the classes, there is little to no difference in using the '\texttt{empirical}' parameter over '\texttt{uniform}', so we just stuck with '\texttt{uniform}'.
 %\subsection{Artificial Neural Networks (ANN)}
 
 
@@ -56,11 +56,11 @@ We fitted a Naive Bayes model based on the exercise in doing so. It was quite fa
 % either focus on one of these fitted models or consider fitting one model for
 % the optimal setting of the parameters estimated by cross-validation to all the
 % data.)
-For some models it is more trivial to explain what is going on behind the scene, but with this dataset of 272 features some of the simplicity fades away. Using decision trees it is trivial to by hand to take a new sample and move your way down the tree until a leaf is reached. At each split one could look at the distributions of samples in the two subtrees and tell what the meaning of the feature is. We argue that because of our data size it is not feasible to manually move one observation down the tree even though it being trivial. 
+For some models it is more trivial to explain what is going on behind the scene, but with this dataset of 272 features some of the simplicity fades away. Using decision trees it is trivial to by hand to take a new sample and move your way down the tree until a leaf is reached. At each split one could look at the distributions of samples in the two subtrees and tell what the meaning of the feature is. We argue that because of our data size it is not feasible to manually move one observation down the (massive) tree even though it is a trivial task. 
 
 For neural networks we could also manually compute the activation of each neuron and so forth. This could be done efficiently with matrix multiplication but because of the data size it would take forever. 
 
-While understanding the theory and how a model classify a observation, it makes less sense in our case and we have put our faith into the toolbox. 
+While understanding the theory and how a model classify a observation, it makes less sense in our case and we have put our faith into the toolbox and the tools it provides to fit and test/explain these models. 
 
 \section{Performance comparison}
 % Statistically compare the performance of the two best performing models (i.e.,
