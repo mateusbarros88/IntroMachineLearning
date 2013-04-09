@@ -2,24 +2,19 @@
 clear all;
 close all;
 clc;
-datapath = '../../MNIST Dataset/';
-addpath(['../../Toolbox/MBox']);
-addpath(['../../Toolbox/']);
-addpath(datapath);
+addpath('../../Toolbox/MBox');
+addpath('../../Toolbox/');
+addpath('../../MNIST Dataset/');
 
 load data_cache_2
 
-classLabels = classNames(Y_train+1);
-
-clear ims nrows
+classLabels = classNames(y_train+1);
 
 %% Data specification
 
 X = X_train;
-
+y = y_train;
 [N,M] = size(X);
-
-clear Data Labels
 
 %% Decision Tree
 load cv_split;
@@ -27,7 +22,7 @@ load cv_split;
 K = CV.NumTestSets;
 
 % Pruning levels
-prune = 0:50;
+prune = 25:35;
 
 % Variable for classification error
 Error_train = nan(K,length(prune));
@@ -60,7 +55,7 @@ for k = 1:K
     toc
 end
 
-% Plot classification error
+%% Plot classification error
 mfig('Digit decision tree: K-fold crossvalidatoin'); clf; hold all;
 plot(prune, sum(Error_train)/sum(CV.TrainSize));
 plot(prune, sum(Error_test)/sum(CV.TestSize));

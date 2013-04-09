@@ -16,6 +16,24 @@ Since we have a lot of attributes, which do not hold any significant meaning bes
 
 
 \subsection{K-Nearest Neighbors (KNN)}
+As the computation demand of KNN is significant larger then the other two, we first estimated parameters for a subset of the data and then did the same again for a smaller subset of the parameters. This way we was able to find the optimal parameter in feasible time.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{code/confusm_k5}
+\caption{The confusion matrix for KNN classifications with 5 neighbors. It can be seen how 3 and 5 get confused the most.\label{fig:knn}}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{code/5fold_knn_10000samples}
+\caption{The five fold cross validation for 10000 samples.\label{fig:knn_small}}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{code/5fold_knn_60000samples}
+\caption{The cross validation for the full dataset.\label{fig:knn_large}}
+\end{figure}
+
 
 
 \subsection{Naïve Bayes}
@@ -41,3 +59,14 @@ While understanding the theory and how a model classify a observation, it makes 
 % use a paired t-test). Compare in addition if the performance of your models
 % are better than simply predicting all outputs to be the largest class in the
 % training data.
+In Table~\ref{tab:ttest} the paired t-test values can be seen. As none of them span across zero they are all significant different.
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+KNN vs Trees & [-0.0604   -0.0540] \\ \hline
+KNN vs NB	 & [-0.1217   -0.1173]\\ \hline   %KNN vs
+NB vs Trees  & [-0.0657   -0.0589] \\ \hline					%Naive vs
+\end{tabular}\\
+\caption{Paired T-Test\label{tab:ttest}}
+\end{table}
