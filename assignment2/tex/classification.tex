@@ -9,15 +9,19 @@ We choose to solve the obvious classification problem for the MNIST data set, wh
 % loop and give in a table the performance results for the methods evaluated
 % on the same cross-validation splits on the outer cross-validation loop, i.e. you
 % should use two levels of cross-validation).
-There have been looked into a few different methods for classification and by means of paired t-tests it have been found if one method is significant different from the others.
+There have been looked into a few different methods for classification and by means of paired t-tests it have been found if one method is significant different from the others. Since we need to compare them, the same 5-fold cross-validation split is used for each of them.
 
 \subsection{Decision Trees}
 Since we have a lot of attributes, which do not hold any significant meaning besides an seemingly arbitrary integer value, the decision tree solution is likely to not be very precise in determining the class. It will also be quite a bit tree since it has to value in each  of the different attributes, and determine what the meaning of that specific attribute might be in the classification.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{code/decision_tree_pruning}
-\caption{test\label{fig:linf}}
+\includegraphics[width=0.6\linewidth, trim= 0mm 70mm 0mm 70mm, clip]{code/decision_tree_pruning}
+\caption{Error rates for different pruning level for our decision tree. It shows that the optimal pruning level for this case is around 25-35.}
+\label{fig:dec_tree}
 \end{figure}
+
+In Figure ~\ref{fig:dec_tree} we can see the error rate for our Decision Tree classifiers, and how the pruning level affects (albeit not much) this. For pruning level 32 the error hovers around $~0.1$, which is the minimal average of the different cross-validation models.
 
 \subsection{K-Nearest Neighbors (KNN)}
 As the computation demand of KNN is significant larger then the other two, we first estimated parameters for a subset of the data and then did the same again for a smaller subset of the parameters. This way we was able to find the optimal parameter in feasible time.
@@ -29,12 +33,12 @@ As the computation demand of KNN is significant larger then the other two, we fi
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{code/5fold_knn_10000samples}
+\includegraphics[width=0.6\linewidth, trim= 0mm 30mm 0mm 30mm, clip]{code/5fold_knn_10000samples}
 \caption{The five fold cross validation for 10000 samples.\label{fig:knn_small}}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{code/5fold_knn_60000samples}
+\includegraphics[width=0.6\linewidth, trim= 0mm 30mm 0mm 30mm, clip]{code/5fold_knn_60000samples}
 \caption{The cross validation for the full dataset.\label{fig:knn_large}}
 \end{figure}
 

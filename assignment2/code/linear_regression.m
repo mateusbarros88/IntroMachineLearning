@@ -18,7 +18,8 @@ funLinreg = @(X_train, y_train, X_test, y_test) ...
 
 %% Pick a number and attribute to predict
 num = 4;
-attr = 31;
+attrs = [31 50];
+attr = attrs(1);
 
 % range = 1:56; % vert+hori
 % range = 57:128; % radi
@@ -28,6 +29,13 @@ range = 129:200; % in-out
 % Extract only data matching the picked number
 X = X_train(ismember(y_train, num), range); 
 attributeNames = attributeNames(range);
+
+% Statistics on
+hist(X(:,attrs));
+xlabel('Feature value');
+ylabel('Count');
+title('Distribution of picked features')
+legend(attributeNames(attrs))
 
 % Extract the attribute we want to predict
 y = X(:,attr);

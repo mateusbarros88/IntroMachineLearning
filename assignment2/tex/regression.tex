@@ -13,7 +13,9 @@ To keep it simple we will only look within a single class which in this report i
 % describe parts of the residuals.
 Doing forward selection between all remaining 271 features will take a tremendous amount of time. Therefore we choose to only look within a certain part of the attributes (horizontal/vertical/radial histograms or in-out/out-in profiles), and limit it to these. \\
 
-For our tests in this report we chose to stick to the in-out section of our features, which brings the feature count down to 72, which is manageable. From these we chose different features to try to predict. Here are two of these cases:
+For our tests in this report we chose to stick to the in-out section of our features, which brings the feature count down to 72, which is manageable. From these we chose different features to try to predict and looked at the outcome, which usually either resulted in decent error rate or a quite bad error rate -- based on the feature we choose to predict.
+
+Here is one example for each of these two cases:
 
 \subsection*{Predicting feature 'In-out 50'}
 
@@ -23,7 +25,7 @@ Then we did forward feature selection with 10-fold cross-validation, and the sel
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth, trim= 50mm 50mm 50mm 50mm]{code/linear_regression_attr50}
+\includegraphics[width=\linewidth, trim= 50mm 50mm 50mm 60mm, clip]{code/linear_regression_attr50}
 \caption{Linear regression with forward feature selection when for predicting feature \texttt{'In-out 50'}. The feature selection for each of the cross-validation is shown. Not many features are selected in order to achieve the best outcome in each cross-validation.}
 \label{fig:linforward_attr50}
 \end{figure}
@@ -45,7 +47,7 @@ Linear regression with sequential feature selection:
 - R^2 test:         0.94
 \end{verbatim}
 
-Quite decent error rate when trying to predict the feature, which means that it would be viable to predict it with this approach-
+Quite decent error rate when trying to predict the feature, which means that it would be viable to predict it with this approach. It is interesting to see that it also does not seem to overfit even without feature selection and still accomplishes a decent error rate here.
 
 \subsection*{Predicting feature 'In-out 31'}
 
@@ -56,7 +58,7 @@ Then we did forward feature selection with 5-fold cross-validation (since it was
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth, trim= 50mm 50mm 50mm 50mm]{code/linear_regression_attr31}
+\includegraphics[width=\linewidth, trim= 50mm 50mm 50mm 70mm, clip]{code/linear_regression_attr31}
 \caption{Linear regression with forward feature selection when for predicting feature \texttt{'In-out 31'}. The feature selection for each of the cross-validation is shown. More features needed when trying to predict this certain feature compared to attribute 50 from before.}
 \label{fig:linforward_attr31}
 \end{figure}
@@ -80,9 +82,19 @@ Linear regression with sequential feature selection:
 
 This time it is much worse, and it does \emph{not} seem very viable to predict this certain feature with basic linear regression.
 
-
 \subsection*{Overall}
 Some features are quite possible to predict, while others are much more difficult using only linear regression. Predicting a single feature with \emph{all} of our original 272 features might be better these cases, but we are not really able to test this because of the immense computation-time for this report.
+
+The distribution of values in the two features are quite distinct as well as seen in Figure ~\ref{attr_hist}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{code/attribute_histograms}
+\caption{Distribution of values for the two extracted features. One can see that the one with low error rate is dominated by 0 and 1 entries, meaning it is easier to guess right, while the other one is more equally distributed amongst its values.}
+\label{fig:attr_hist}
+\end{figure}
+
+This clearly shows that the \texttt{'In-out 31'} feature is more evenly spread, while \texttt{'In-out 50'} is mainly around 0 making it easier to predict. This is likely the reason behind the differences in error rate for these two, since \texttt{'In-out 31'} seems more erratic and/or random than the other one.
 
 \section{New data observation}
 % Explain how a new data observation is predicted according to the estimated
@@ -106,16 +118,18 @@ The average error rate for the \texttt{'In-out 50'}:
 Error rate: 0.012
 \end{verbatim}
 
-It already had a good error rate using basic linear regression, but it got even better with ANN from $0.06$ to $0.012$.
+It already had a good error rate using basic linear regression, but it is now $~5$ times better with ANN -- from $0.06$ to $0.012$.
 
 \subsection*{In-out 31}
-For \texttt{'In-out 31'}:
+For \texttt{'In-out 31'} the resulting error rate became:
 
 \begin{verbatim}
 Error rate: 0.035
 \end{verbatim}
 
-Which greatly improves the error rate compared to the linear regression. From a huge $0.57$ error rate on the test data, to only $0.035$!
+Which greatly improves the error rate compared to the linear regression. From a huge error rate of $0.57$ on the test data, to only $0.035$! Making it $\frac{0.57}{0.035} \approx 16$ times better \\
+
+A paired t-test between these two seems excessive since we can already clearly see that the ANN beats the linear regression significantly regarding the average error rates.
 
 %\section{Performance comparison}
 % Statistically evaluate if there is a significant performance difference between
