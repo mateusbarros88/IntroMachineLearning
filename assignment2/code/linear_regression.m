@@ -18,7 +18,7 @@ funLinreg = @(X_train, y_train, X_test, y_test) ...
 
 %% Pick a number and attribute to predict
 num = 4;
-attr = 50;
+attr = 31;
 
 % range = 1:56; % vert+hori
 % range = 57:128; % radi
@@ -35,14 +35,14 @@ X(:,attr) = [];
 attributeNames(attr) = [];
 [N,M] = size(X);
 
-clear num attr
+clear num
 
 %% Setup cross-validation
-K = 10;
+K = 5;
 CV = cvpartition(N, 'Kfold', K);
 
 % Initialize variables
-Features = nan(K,M);
+Features = logical(false(K,M));
 Error_train = nan(K,1);
 Error_test = nan(K,1);
 Error_train_fs = nan(K,1);
@@ -67,6 +67,8 @@ for k = 1:K
     
     % Save the selected features
     Features(k,:) = F;
+    
+    fprintf('Features picked %d/%d\n', sum(F), M);
     
     % Compute squared error without using the input data at all
     Error_train_nofeatures(k) = sum((y_train-mean(y_train)).^2);
@@ -97,16 +99,18 @@ mfig('Attributes'); clf;
 bmplot(1:K, attributeNames, Features);
 xlabel('Attribute');
 ylabel('Crossvalidation fold');
-title('Attributes selected');
+title(sprintf('Linear regression, picked attribute %d', attr));
 
 set(gca, 'XTick', 1, 'XTickLabel', '');
 hx = get(gca,'XLabel'); % Handle to xlabel 
 set(hx,'Units','data'); 
 pos = get(hx,'Position'); 
-y = pos(2);
+ypos = pos(2);
 
 % Place the new labels 
 for i = 1:length(attributeNames),
-    t(i) = text(i,y,attributeNames(i)); 
+    t(i) = text(i,ypos,attributeNames(i)); 
 end;
 set(t,'Rotation',90,'HorizontalAlignment','right') ;
+
+set(hx, 'Position', pos+[0 4 0]);
