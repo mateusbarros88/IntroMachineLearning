@@ -134,7 +134,7 @@ end
 %save '5fold_10000samples_error_knn.mat' 'CV' 'Error'
 %save '5fold_60000samples_error_knn_L2_5.mat' 'CV' 'Error'
 mfig('Error rate');
-plot(1:size(Error,2),sum(Error)./sum(CV.TestSize)*100);
+plot(2:size(Error,2)+1,sum(Error)./sum(CV.TestSize)*100);
 xlabel('Number of neighbors');
 ylabel('Classification error rate (%)');
 
