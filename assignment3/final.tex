@@ -1,0 +1,60 @@
+\documentclass[10pt,a4paper]{report}
+\newcommand{\confdir}{../conf/} % Set the folder which contains preamble.tex, titlepage.tex and the general img/ folder
+\newcommand{\imgdir}{img/} % Set the folder which contains the specific images for the report
+\newcommand{\texdir}{tex/} % Set the folder which contains the content (.tex files)
+\input{\confdir preamble}
+
+
+%%%%%%%%%%%
+%% SETUP %%
+%%%%%%%%%%%
+
+%% Set the course number and course name
+% Usage: \setcourse{<course no>}{<course name>}
+	\setcourse{02450}{Introduction to Machine Learning and Data Modeling}
+
+%% Set the title of the report
+% Usage: \settitle{<title>}
+	\settitle{Assignment 3}
+
+%% Set the subtitle of the report
+% Usage: \setsubtitle{<subtitle>}
+	\setsubtitle{Clustering, association mining and anomaly detection}
+
+%% Set the date the report is handed in
+% Usage: \setdate{<hand-in date>}
+	\setdate{May 7th 2013}
+
+%% Add the authors of the report
+% Usage: \addauthor{<study number>}{<first name(s)>}{<last name>}
+	\addauthor{s093294}{Poul Kjeldager}{Sørensen}
+	\addauthor{s093280}{Martin Kasban}{Tange}
+
+%%%% END OF SETUP
+
+%ADDED BY POUL
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\usepackage[final,english,margin]{fixme}
+
+
+
+
+\begin{document}
+
+%% Insert titlepage
+\inserttitlepage
+
+%% Insert table-of-contents
+\inserttoc
+
+%% Input files for the report
+\inputtex{introduction}
+\inputtex{clustering}
+\inputtex{association_mining}
+\inputtex{anomaly_detection}
+\inputtex{conclusion}
+
+
+\end{document}
