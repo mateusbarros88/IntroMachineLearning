@@ -8,7 +8,7 @@ addpath('../../Toolbox/02450Tools/');
 
 load data_cache_2;
 
-n = [1,0];
+n = 0:10;
 
 y = y_train;
 X = X_train;
@@ -30,7 +30,7 @@ Z = U*S;
 % Number of clusters
 K = 2;
 
-Z = Z(:,1:5);
+Z = Z(:,1:10);
 
 % Fit model
 G = gmdistribution.fit(Z, K, 'regularize', 10e-9);
