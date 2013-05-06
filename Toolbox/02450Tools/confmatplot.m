@@ -1,4 +1,4 @@
-function [acc,err]= confmatplot(G, Ghat)
+function confmatplot(G, Ghat)
 % CONFMATPLOT
 % Graphically display a confusion matrix
 %
@@ -32,7 +32,5 @@ for i = 1:size(C,1)
         end
     end
 end
-acc = trace(C)/sum(sum(C))*100;
-err = (sum(sum(C))-trace(C))/sum(sum(C))*100;
 title(sprintf('Accuracy=%.1f%%, Error Rate=%.1f%%', ...
     trace(C)/sum(sum(C))*100, (sum(sum(C))-trace(C))/sum(sum(C))*100));
