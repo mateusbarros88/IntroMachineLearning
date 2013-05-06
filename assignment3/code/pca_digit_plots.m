@@ -78,7 +78,7 @@ Xc = [ Z(idx,1) Z(idx,2)]*scale*9;
        try
            
        if ~any( map(  (round(Xc(n,2))-14:round(Xc(n,2))+13)+mapsize/2, (round(Xc(n,1))-14:round(Xc(n,1))+13)+mapsize/2,: ))
-        im = repmat(flipud(ims(:,:,allidx(idx(n))))/255,[1 1 3]);
+        im = repmat((ims(:,:,allidx(idx(n))))/255,[1 1 3]);
         im(:,:,1) = im(:,:,1)*cmap(y(allidx(idx(n)))+1,1);
         im(:,:,2) = im(:,:,2)*cmap(y(allidx(idx(n)))+1,2);
         im(:,:,3) = im(:,:,3)*cmap(y(allidx(idx(n)))+1,3);
