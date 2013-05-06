@@ -27,7 +27,7 @@ Z = U*S;
 y = y(1:10000);
 Z = Z(1:10000,:);
 
-Z = Z(:,1:20);
+Z = Z(:,1:40);
 N = length(Z);
 
 %% Hierarchical clustering
@@ -36,7 +36,7 @@ N = length(Z);
 Maxclust = 50;
 
 % Compute hierarchical clustering
-L = linkage(Z, 'single', 'euclidean');
+L = linkage(Z, 'ward', 'euclidean');
 
 % Compute clustering by thresholding the dendrogram
 i = cluster(L, 'Maxclust', Maxclust);
@@ -49,4 +49,4 @@ i = cluster(L, 'Maxclust', Maxclust);
 
 % Plot data
 mfig('Hierarchical'); clf; 
-clusterplot(L, y, i);
+clusterplot(Z, y, i);

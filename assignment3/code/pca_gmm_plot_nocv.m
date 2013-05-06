@@ -8,7 +8,7 @@ addpath('../../Toolbox/02450Tools/');
 
 load data_cache_2;
 
-n = [0,1];
+n = 0:9;
 
 y = y_train;
 X = X_train;
@@ -28,12 +28,12 @@ Z = U*S;
 %% Gaussian mixture model
 
 % Number of clusters
-K = 2;
+K = 50;
 
-Z = Z(:,1:10);
+Z = Z(:,1:30);
 
 % Fit model
-G = gmdistribution.fit(Z, K, 'regularize', 10e-9);
+G = gmdistribution.fit(Z, K, 'replicates', 10);
 
 % Compute clustering
 i = cluster(G, Z);
@@ -48,3 +48,18 @@ Sigma_c=G.Sigma;
 mfig('GMM: Clustering'); clf;
 clusterplot(Z, y, i);
 
+%% Print results
+
+correct = nan(K,1);
+
+for t = 1:K
+    c = y(i==t);
+    num = mode(c);
+    
+    correct(t) = sum(c == num);
+    
+    fprintf('Cluster %d has mode %d\n', t, num);
+    fprintf('  Success rate: %d/%d (%.4f)\n', correct(t), length(c), correct(t)/length(c)*100);
+end;
+
+fprintf('\nOVERALL: %.4f\n', sum(correct)/length(i)*100);

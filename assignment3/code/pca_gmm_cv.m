@@ -11,8 +11,7 @@ load data_cache_2;
 y = y_train;
 X = X_train;
 
-
-n = 0:9;
+n = [0,1,2,3,4];
 
 X = X(ismember(y,n),:);
 y = y(ismember(y,n),:);
@@ -34,7 +33,7 @@ N = length(Z);
 
 % Range of K's to try
 %KRange = [10,20,30,40,50,60,70,80,90,100,110,120];
-KRange = 45:55;
+KRange = 15:30;
 T = length(KRange);
 
 % Allocate variables
