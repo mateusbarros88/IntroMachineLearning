@@ -14,15 +14,17 @@ addpath(datapath);
     ims = reshape(Data,nrows,ncols,size(Data,2));   
 %%
 
-n = 5;
-
+n = 0:9;
+imagemap = zeros(5*28,10*28,3);
 y = y_train;
 X = X_train;
 
-Xt = X(y==n,:);
-allidx = find(y==n);
+for nidx = n;
+    
+Xt = X(y==nidx,:);
+allidx = find(y==nidx);
 yt = y(allidx,:);
-%%
+
 % exercise 11.2.4
 
 % Neighbor to use
@@ -35,16 +37,21 @@ K = 5;
 f = D(:,K+1);
 
 % Sort the outlier scores
-[y,i] = sort(f, 'descend');
-%%
+[~,i] = sort(f, 'descend');
+
 % Display the index of the lowest density data object
 % The outlier should have index 1001
 disp(allidx(i(1:5)));
-
+for imi = 1:5 
+    im = repmat((ims(:,:,allidx(i(imi))))/255,[1 1 3]);
+    imagemap( (imi-1)*28+1:(imi*28),nidx*28+1:nidx*28+28,:) = im;
+end
 % Plot kernel density estimate outlier scores
-mfig('Distance: Outlier score'); clf;
-bar(y(1:200));
-
+%mfig('Distance: Outlier score'); clf;
+%bar(y(1:200));
+image(imagemap)
+axis equal
+end
 
 
 
