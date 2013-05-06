@@ -51,7 +51,7 @@ rng(202322);
 Z = U*S;
 N=length(Z);
 idx = zeros(N,1);
-scale = 6;
+scale = 1;
 mapsize=500*scale;
 map = zeros(mapsize,mapsize,3);
 cmap =[1 0 0    %0
