@@ -13,3 +13,5 @@ We did an experiment with KNN and five neighbours, to show the five digits in ea
 \caption{The top five outliers from each class found with knn and 5 neighbours.}
 \label{fig:outlier_knn}
 \end{figure}
+
+We didn't follow throw with the GMM solutions for finding outliers due to this dataset have not been designed for this kind of task. Furthermore it takes significant amount of time to fit GMM over the dataset, and by filtering only some data we might enforce some outliers that are not truth outliers. Instead we did like this to see what digits in each class that scored the highest.
