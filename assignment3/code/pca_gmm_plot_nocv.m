@@ -8,7 +8,7 @@ addpath('../../Toolbox/02450Tools/');
 
 load data_cache_2;
 
-n = 0:10;
+n = [0,1];
 
 y = y_train;
 X = X_train;
