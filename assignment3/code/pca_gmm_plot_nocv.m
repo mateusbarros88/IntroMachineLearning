@@ -24,29 +24,28 @@ Y = bsxfun(@minus, X, mean(X));
 
 Z = U*S;
 
+%Z = Z(1:20000,:);
+
 
 %% Gaussian mixture model
 
 % Number of clusters
-K = 50;
+K = length(n);
 
-Z = Z(:,1:30);
+Z = Z(:,1:40);
 
 % Fit model
-G = gmdistribution.fit(Z, K, 'replicates', 10);
+G = gmdistribution.fit(Z, K, 'replicates', 10, 'regularize', 10e-6);
 
 % Compute clustering
 i = cluster(G, Z);
-
-%% Extract cluster centers
-X_c = G.mu;
-Sigma_c=G.Sigma;
 
 %% Plot results
 
 % Plot clustering
 mfig('GMM: Clustering'); clf;
 clusterplot(Z, y, i);
+title('Clustering of digits 0-9');
 
 %% Print results
 
