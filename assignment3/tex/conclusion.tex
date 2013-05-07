@@ -1,14 +1,20 @@
 \chapter{Discussion}
-In this report we have only solved some of the task asked being limited in time an by some tasks not as trivial on our dataset. 
+In this report we have only solved some of the tasks asked, but we have somewhat been limited (again) by some tasks as they are not trivial on our data set, or greatly time consuming and therefore just not viable. \\
 
-In clustering we had a had time finding any proper way of visualizing and showing clusters. One of the tasks that would make most sense with clustering would be to cluster the digits base on the classes. 
+First off we wanted to see some clusters within each class, so we did PCA on a single digit at a time and found a few of them which had clusters. We were interested in why these were clustered as they were, so we illustrated this by putting the digit images into the plot for a nice visual effect. \\
 
-Fitting the GMM was not that trivial as it required significant amount of CPU time. We tried to evaluate by only fitting a few classes and clustering them. 
+Fitting the GMM was not that trivial as it required significant amount of CPU time. We tried to evaluate by only fitting a few classes and clustering them, as well as limiting it to the first few principal components, and in some cases only a subset of the observations. 
 
-We didn't manage to get the data transformed to binary and doing the associative mining in time.
+In GMM clustering we also spent some time figuring out any proper way of visualizing and showing clusters. One of the tests that would make most sense with clustering would be to cluster the digits base on the classes, so we added a separate section for this which showed quite promising results. \\
+
+We didn't manage to get the data transformed to binary and doing the associative mining, since we did not see this conclude anything at all with our features. \\
 
 We decided it would be fun to see what digits got the highest outlier score based on KNN with 5 neighbours, expecting it to find some numbers we would as humans would classify as being a little odd. We show that this was truth, and there was some digits with some funny shapes that we would have a hard time telling to be its correct digits. But the problem about outliers is to tell when its an outlier when there are multiply of these digits that look a bit funny. 
 
  
 \chapter{Conclusion}
-This assignment have room for improvements. There was some sections that have been skipped out due poor time management, but overall we tried to cover the topics as good as we could.
+We found some nice clusters within classes and seen what exactly separates these with our features. Clustering was also done over all the classes in several different ways in order to achieve and show some results. 
+
+Afterwards we discovered some of the outliers for each class. These clearly show that they can be named an 'outlier' since they are far from the 'norm' of how that specific digit should look. \\
+
+This assignment has room for improvements, since there were some sections that have been skipped out due to huge computer processing time, poor time management, and lack of relevance to our data set. But overall we tried to cover the topics as best as we could and saw fit.
